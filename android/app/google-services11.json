@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "765746116186",
+    "project_id": "phsales-e149f",
+    "storage_bucket": "phsales-e149f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:765746116186:android:39ab4da581d69dcdde8a63",
+        "android_client_info": {
+          "package_name": "com.phoenix.phoenix_sales_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "765746116186-gvl3uurkc325nsg086hp7ea9vlk09mfv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzhkr1hpZoe1HVPrlvKw2AdCb-q71GGyk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "765746116186-gvl3uurkc325nsg086hp7ea9vlk09mfv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
