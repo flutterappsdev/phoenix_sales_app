@@ -2,58 +2,50 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../models/menu.dart';
 
+// ignore: constant_identifier_names
 const DUMMY_CATEGORIES = [
   Menu(
-    id: 'c1',
-    title: 'TR Creation',
-    color: Colors.purple,
-    routeName: 'TrEntry',
-    icon: Icons.note_add_outlined
-  ),
+      id: 'c1',
+      title: 'TR Creation',
+      color: Colors.purple,
+      routeName: 'TrEntry',
+      icon: Icons.note_add_outlined),
   Menu(
-    id: 'c2',
-    title: 'Supply',
-    color: Colors.red,
-    icon: Icons.delivery_dining,
-    routeName: 'SupplyEntryScreen'
-   ),
+      id: 'c2',
+      title: 'Supply',
+      color: Colors.red,
+      icon: Icons.delivery_dining,
+      routeName: 'SupplyEntryScreen'),
   Menu(
       id: 'c11',
       title: 'New Farmer',
       routeName: 'NewCustomeradd',
       color: Colors.purpleAccent,
-      icon: FontAwesomeIcons.addressCard
-  ),
-
+      icon: FontAwesomeIcons.addressCard),
   Menu(
       id: 'c12',
       title: 'List New Farmer',
       //routeName: 'NewCustomeradd',
       color: Colors.indigoAccent,
-      icon: FontAwesomeIcons.listAlt
-  ),
-
+      icon: FontAwesomeIcons.listAlt),
   Menu(
-    id: 'c3',
-    title: 'Chicks Demand',
-    color: Colors.orange,
-    routeName: 'ChicksDemandScreen',
-    icon: Icons.note
-  ),
+      id: 'c3',
+      title: 'Chicks Demand',
+      color: Colors.orange,
+      routeName: 'ChicksDemandScreen',
+      icon: Icons.note),
   Menu(
-    id: 'c4',
-    title: 'List TR(Customer)',
-    routeName: 'ListTrCustomer',
-    color: Colors.amber,
-      icon: FontAwesomeIcons.list
-  ),
+      id: 'c4',
+      title: 'List TR(Customer)',
+      routeName: 'ListTrCustomer',
+      color: Colors.amber,
+      icon: FontAwesomeIcons.list),
   Menu(
       id: 'c4',
       title: 'Daily Expenses',
       color: Colors.blueGrey,
       routeName: 'DailyExpensesScreen',
-      icon: FontAwesomeIcons.moneyBill
-  ),
+      icon: FontAwesomeIcons.moneyBill),
   Menu(
     id: 'c5',
     title: 'Image Upload',
@@ -62,47 +54,39 @@ const DUMMY_CATEGORIES = [
     routeName: 'ImageUploadScreen',
   ),
   Menu(
-    id: 'c6',
-    title: 'List TR',
-    color: Colors.green,
-    icon: FontAwesomeIcons.list,
-    routeName: 'ListTrData'
-  ),
+      id: 'c6',
+      title: 'List TR',
+      color: Colors.green,
+      icon: FontAwesomeIcons.list,
+      routeName: 'ListTrData'),
   Menu(
-    id: 'c7',
-    title: 'List Supply',
-    color: Colors.lightBlue,
+      id: 'c7',
+      title: 'List Supply',
+      color: Colors.lightBlue,
       icon: FontAwesomeIcons.listAlt,
-    routeName: 'ListDmData'
-  ),
+      routeName: 'ListDmData'),
   Menu(
-    id: 'c8',
-    title: 'List Demand',
-    color: Colors.lightGreen,
+      id: 'c8',
+      title: 'List Demand',
+      color: Colors.lightGreen,
       icon: FontAwesomeIcons.listOl,
-      routeName: 'ListDemadData'
-  ),
+      routeName: 'ListDemadData'),
   Menu(
-    id: 'c9',
-    title: 'List Expenses',
-    color: Colors.pink,
+      id: 'c9',
+      title: 'List Expenses',
+      color: Colors.pink,
       routeName: 'ListExpenseData',
-      icon: FontAwesomeIcons.moneyBillWave
-  ),
-
+      icon: FontAwesomeIcons.moneyBillWave),
   Menu(
       id: 'c4',
       title: 'List Supply(Customer)',
       color: Colors.amber,
       routeName: 'ListDmCustomer',
-      icon: FontAwesomeIcons.list
-  ),
+      icon: FontAwesomeIcons.list),
   Menu(
-    id: 'c10',
-    title: 'Start Trip',
-    routeName: 'TripScreen',
-    color: Colors.teal,
-      icon: FontAwesomeIcons.mapSigns
-  ),
-
+      id: 'c10',
+      title: 'Start Trip',
+      routeName: 'TripScreen',
+      color: Colors.teal,
+      icon: FontAwesomeIcons.mapSigns),
 ];
