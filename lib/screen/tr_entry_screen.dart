@@ -348,7 +348,7 @@ class _TrEntryScreenState extends State<TrEntryScreen> {
                   Flexible(
                     flex: 3,
                     child: DropdownButton(
-                        style: TextStyle(fontSize: 20, color: Colors.black),
+                        style: TextStyle(fontSize: 16, color: Colors.black),
                         dropdownColor: Colors.white,
                         value: _value,
                         items:const [

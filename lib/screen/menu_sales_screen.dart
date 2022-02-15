@@ -57,7 +57,7 @@ class MenuItem extends StatelessWidget {
         Navigator.of(context).pushNamed(routeName!);
       },
       child: Container(
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
        // child: Text(title),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -66,8 +66,11 @@ class MenuItem extends StatelessWidget {
             Icon(icon,size: 40,
               color: Colors.white,
             ),
+           const SizedBox(
+              height: 2.0,
+            ),
             Text(title,style: const TextStyle(
-              color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20
+              color: Colors.white,fontWeight: FontWeight.bold,fontSize: 18
             ),
             ),
           ],

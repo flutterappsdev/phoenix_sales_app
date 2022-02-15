@@ -25,7 +25,7 @@ const DUMMY_CATEGORIES = [
   Menu(
       id: 'c12',
       title: 'List New Farmer',
-      //routeName: 'NewCustomeradd',
+      routeName: 'ListNewFarmer',
       color: Colors.indigoAccent,
       icon: FontAwesomeIcons.listAlt),
   Menu(

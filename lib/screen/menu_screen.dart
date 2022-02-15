@@ -94,7 +94,7 @@ class _MenuGridState extends State<MenuGrid> {
                 controller: txtController,
                 clearOnSubmit: false,
                 suggestions: customerList1,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                   fontSize: 16.0,
                   fontFamily: 'WorkSans',

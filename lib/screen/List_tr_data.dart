@@ -37,6 +37,7 @@ class _ListTrDataState extends State<ListTrData> {
   List<ListTr> trList = [];
   bool _isDropDownFilled = false;
 
+
   void fillTrData() async {
     Uri url =
        Uri.parse('$Url/ShowTrData?AreaCode=$AreaCode&uname=$UserName&TrDate=${_trDateController.text}');

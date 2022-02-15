@@ -23,6 +23,12 @@ String qty1='';
 String mortality1='';
 String ctype1='';
 double free=0;
+double amount = 0 ;
+double chicks_qty= 0 ;
+double biiling_qty= 0 ;
+double freeper = 0 ;
+double rate3= 0;
+double mortaliry3= 0;
 //
 Future<Uint8List> generateDmPrint(PdfPageFormat format,String dmno,String dmdate,String  cname,String hdate,String ctype,String qty, String mortality,String rate) async {
   final doc = pw.Document(title: 'Dm Print', author: 'Krishna Sharma');
@@ -35,10 +41,23 @@ Future<Uint8List> generateDmPrint(PdfPageFormat format,String dmno,String dmdate
   mortality1 = mortality;
   qty1= qty;
    if (ctype1 == 'Broiler'){
-   free = double.parse(qty1)*2/102;
+      rate3 =  double.parse(rate1);
+      mortaliry3 = double.parse(mortality1);
+     freeper = 2;
+   free = (double.parse(qty1) + double.parse(mortality1)) * 2/102;
+     chicks_qty = (double.parse(qty1) + double.parse(mortality1)) ;
+     biiling_qty = (double.parse(qty1) + double.parse(mortality1)) - free;
+   amount = ((double.parse(qty1) + double.parse(mortality1))- free) * double.parse(rate1);
    }
    if (ctype1 == 'Layer'){
-     free = double.parse(qty1)*5/105;
+     //chicks_qty = (double.parse(qty1) + double.parse(mortality1));
+     rate3 =  double.parse(rate1);
+     mortaliry3 = double.parse(mortality1);
+     freeper = 5;
+     free = (double.parse(qty1) + double.parse(mortality1)) * 5/105;
+     chicks_qty = (double.parse(qty1) + double.parse(mortality1)) ;
+     biiling_qty = (double.parse(qty1) + double.parse(mortality1)) - free;
+     amount = ((double.parse(qty1) + double.parse(mortality1))- free) * double.parse(rate1);
    }
 
   final profileImage = pw.MemoryImage(
@@ -234,16 +253,17 @@ class _Block extends pw.StatelessWidget {
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
                 children: <pw.Widget>[
                   // pw.Lorem(length: 20),
-                  pw.Text('DM No.:'+trno1),
-                  pw.Text('DM Date.:'+trdate1),
-                  pw.Text('Hatch Date:'+hdate1),
-                  pw.Text('Chick Type:'+ctype1),
-                  pw.Text('Quantity:'+qty1),
-                  pw.Text('Mortality:'+mortality1),
-                  pw.Text('Rate:'+rate1),
-                  pw.Text('Free Qty:'+free.toStringAsFixed(0)),
-
-                ]),
+                  pw.Text('DM No.:'+ trno1),
+                  pw.Text('DM Date.:'+ trdate1),
+                  pw.Text('Hatch Date:'+ hdate1),
+                  pw.Text('Chick Type:'+ ctype1),
+                  pw.Text('Total Quantity :'+ chicks_qty.toStringAsFixed(0)),
+                  pw.Text('Bill Quantity :'+ biiling_qty.toStringAsFixed(0)),
+                  pw.Text('Free Qty ${freeper.toStringAsFixed(0)}%:'+ free.toStringAsFixed(0)),
+                  pw.Text('Rate:'+ rate3.toStringAsFixed(2)),
+                  pw.Text('Billing Amount :'+ amount.toStringAsFixed(2)),
+                  pw.Text('Mortality Quantity:'+ mortaliry3.toStringAsFixed(0)),
+                                     ]),
           ),
         ]);
   }

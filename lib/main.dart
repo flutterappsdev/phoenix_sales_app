@@ -21,6 +21,7 @@ import './screen/Pdf_dm.dart';
 import './screen/splashscreenforapp.dart';
 import './screen/MyLoginScreen.dart';
 import './screen/new_customer_add.dart';
+import './screen/List_new_farmer.dart';
  Future<void> main() async {
    WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -60,7 +61,8 @@ class MyApp extends StatelessWidget {
         ListDmCustomer.id :(context)=>ListDmCustomer(),
         PdfTr.id : (context)=>PdfTr(),
         PdfDm.id :(context)=>PdfDm(),
-        NewCustomeradd.id: (context)=>NewCustomeradd()
+        NewCustomeradd.id: (context)=>NewCustomeradd(),
+        ListNewCustomer.id : (context)=>ListNewCustomer(),
       },
     );
   }
