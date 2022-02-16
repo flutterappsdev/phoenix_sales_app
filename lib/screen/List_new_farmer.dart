@@ -35,6 +35,7 @@ class _ListNewCustomerState extends State<ListNewCustomer> {
   void getListFarmaer() async {
     var url = Uri.http('117.240.18.180:3002',
         '/api/AreaCustomer/GetNewCustomer/$AreaCode', {'q': '{http}'});
+    print(url);
     var response = await http.get(url);
 
     if (response.statusCode == 200) {

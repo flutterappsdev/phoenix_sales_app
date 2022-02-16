@@ -29,6 +29,7 @@ dependencies:
   fluttertoast: ^8.0.8
   flutter_sms: ^2.3.2
   #flutter_open_whatsapp: ^0.1.2
+  open_whatsapp: ^0.0.1
   image_picker: ^0.8.4+4
   path_provider: ^2.0.8
   path: ^1.7.0

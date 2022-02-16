@@ -4,7 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '/screen/menu_sales_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_sms/flutter_sms.dart';
-//import 'package:flutter_open_whatsapp/flutter_open_whatsapp.dart';
+import 'package:open_whatsapp/open_whatsapp.dart';
 import '../constant/constants.dart';
 import '../models/customer.dart';
 import '../network/network.dart';
@@ -297,8 +297,8 @@ class _DisplayAndSaveTRState extends State<DisplayAndSaveTR> {
                       String _r = await sendSMS(
                          message: _msg, recipients: recipents);
                       //print(_r);
-                     // FlutterOpenWhatsapp.sendSingleMessage(
-                      // "91$_MobileNumber", _msg);
+                      FlutterOpenWhatsapp.sendSingleMessage(
+                      "91$_MobileNumber", _msg);
                     } catch (e) {
                       print(e);
                     }

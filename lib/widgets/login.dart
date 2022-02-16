@@ -103,7 +103,7 @@ class _LoginUIState extends State<LoginUI> {
                        builder: (BuildContext blidcontext) =>
                            ProgressDialog('Logging in you...'));
                   Uri _url =
-                      Uri.parse('http://117.240.18.180:91/mynew.asmx/Login?User=${_userNameTextController.text}&Password=${_passwordTextController.text}');
+                      Uri.parse('http://117.240.18.180:91/mynew.asmx/Login_new?User=${_userNameTextController.text}&Password=${_passwordTextController.text}');
                  print(_url);
                   NetworkHelper networkHelper = NetworkHelper(_url);
                   var _userData = await networkHelper.getData();

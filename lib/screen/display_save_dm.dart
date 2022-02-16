@@ -3,7 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter_sms/flutter_sms.dart';
-//import 'package:flutter_open_whatsapp/flutter_open_whatsapp.dart';
+import 'package:open_whatsapp/open_whatsapp.dart';
 import '../widgets/rounded_button.dart';
 //import 'package:toast/toast.dart';
 import '../network/network.dart';
@@ -227,14 +227,37 @@ class _SaveSupplyState extends State<SaveSupply> {
                     Navigator.of(context).pop();
 
                     try {
+
+                      double freeper=0,free=0,chicks_qty=0,biiling_qty=0,amount = 0 ;
+                      if (_ctype == 'Broiler')
+                        {
+                          freeper = 2;
+                          free = (double.parse(_totalChicks.toString()) + double.parse(_trasnitMortality.toString())) * 2/102;
+                          chicks_qty = (double.parse(_totalChicks.toString()) + double.parse(_trasnitMortality.toString())) ;
+                          biiling_qty = (double.parse(_totalChicks.toString()) + double.parse(_trasnitMortality.toString())) - free;
+                          amount = biiling_qty * double.parse(_rate.toString());
+                        }
+                      if (_ctype == 'Broiler(M)')
+                      {
+                        freeper = 2;
+                      }
+                      if (_ctype == 'Layer')
+                      {
+                        freeper = 5;
+                      }
+                      if (_ctype == 'Cockrel')
+                      {
+                        freeper = 0;
+                      }
+
                       String _msg =
-                          "Supplied $_ctype Chicks having Qty $_totalChicks With Transit Mortality $_trasnitMortality @ $_rate to $_CName  by DM $_dmNumber For Any Query Contact:9685043413 "  ;
+                          "Supplied $_ctype Chicks having Qty $_totalChicks With  ${freeper.toStringAsFixed(0)} , Final Qty ${biiling_qty.toStringAsFixed(0)} @ $_rate   amount ${amount.toStringAsFixed(0) } to $_CName  by DM $_dmNumber For Any Query Contact:9685043413 "  ;
                       List<String> recipents = [_MobileNumber!];
                       String _r = await sendSMS(
                           message: _msg, recipients: recipents);
                       //print(_r);
-                    //  FlutterOpenWhatsapp.sendSingleMessage(
-                     //     "91$_MobileNumber", _msg);
+                      FlutterOpenWhatsapp.sendSingleMessage(
+                         "91$_MobileNumber", _msg);
                     } catch (e) {
                       print(e);
                     }
