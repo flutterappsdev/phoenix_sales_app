@@ -121,13 +121,13 @@ class _ImageUploadScreenState extends State<ImageUploadScreen> {
                         fit: BoxFit.cover,
                         width: double.infinity,
                       )
-                    : Text(
+                    : const Text(
                         'No Image Taken',
                         textAlign: TextAlign.center,
                       ),
                 alignment: Alignment.center,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               SizedBox(
@@ -135,17 +135,17 @@ class _ImageUploadScreenState extends State<ImageUploadScreen> {
               ),
               FlatButton.icon(
                 icon: Icon(Icons.camera),
-                label: Text('Take Picture '),
+                label: const Text('Take Picture '),
                 textColor: Theme.of(context).primaryColor,
                 onPressed: _takePicture,
               ),
               FlatButton.icon(
                 icon: Icon(Icons.folder_open),
-                label: Text('Select Picture From Gallery'),
+                label: const Text('Select Picture From Gallery'),
                 textColor: Theme.of(context).primaryColor,
                 onPressed: _takePictureGalley,
               ),
-              _isUploaded ? CircularProgressIndicator(strokeWidth: 3,semanticsLabel: 'Uploading...',) :
+              _isUploaded ? const CircularProgressIndicator(strokeWidth: 3,semanticsLabel: 'Uploading...',) :
               RoundedButton(
                   title: 'Upload Image',
                   colour: Colors.lightBlueAccent,
@@ -170,11 +170,11 @@ class _ImageUploadScreenState extends State<ImageUploadScreen> {
                         .child( DateTime.now().toString() + AreaCode! + id! + '.jpg');
 
                     await ref.putFile(_storedImage!);
-                    print("ref" + ref.toString());
+                    //print("ref" + ref.toString());
                     url = await ref.getDownloadURL();
 
                     Uri URL =
-                     Uri.parse('https://phoenixsales-ca589-default-rtdb.firebaseio.com/user_images.json');
+                    Uri.parse('https://phoenixsales-ca589-default-rtdb.firebaseio.com/user_images.json');
                     final response = await http.post(
                       URL,
                       body: json.encode(
@@ -190,17 +190,22 @@ class _ImageUploadScreenState extends State<ImageUploadScreen> {
                       ),
                     );
 
-                    var valkey =  json.decode(response.body) as Map<String,dynamic>;
-                    print(valkey['name'].toString());
+                   // var valkey =  json.decode(response.body) as Map<String,dynamic>;
+                    //print(valkey['name'].toString());
 
 
                     try {
+
+                      List<int>? imageBytes = _storedImage?.readAsBytesSync();
+                      String baseimage = base64Encode(imageBytes!);
+                      print(baseimage);
+
                       Uri urlserver =
-                         Uri.parse('$Url/InsertImageFlutter?AreaCode=$AreaCode&uname=$UserName&AreaName=$AreaName&Img_Name=${_imageNameController.text}&Img=$url&user_id=${valkey['name'].toString()}');
+                         Uri.parse('$Url/InsertImage?AreaCode=$AreaCode&uname=$UserName&AreaName=$AreaName&Img_Name=${_imageNameController.text}&Img=$baseimage');
                       print(urlserver);
                       NetworkHelper networkHelper = NetworkHelper(urlserver);
                       var data = await networkHelper.getData();
-                      print(data);
+                      print("data " + data);
                     } catch (e) {
                       print(e);
                     }

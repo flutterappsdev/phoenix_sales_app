@@ -188,89 +188,101 @@ class _SaveSupplyState extends State<SaveSupply> {
               SizedBox(
                 height: 20,
               ),
-              _isSaved ? Center(child: CircularProgressIndicator(strokeWidth: 2,))  : RoundedButton(
-                  title: 'Save Supply',
-                  colour: Colors.lightBlueAccent,
-                  onPressed: () async {
-                    setState(() {
-                      _isSaved =true;
-                    });
-                    var connectivityResult =
-                        await Connectivity().checkConnectivity();
-                    if (connectivityResult != ConnectivityResult.mobile &&
-                        connectivityResult != ConnectivityResult.wifi) {
-                      Fluttertoast.showToast(msg : "Please check Network Connectivity", toastLength: Toast.LENGTH_LONG, gravity: ToastGravity.CENTER);
-                      return;
-                    }
-
-
-                    fetchDMNumber();
-                    try {
-                      Uri url =
-                         Uri.parse('$Url/InsertDMData?AreaCode=$AreaCode&Area=$AreaName&DMNo=$_dmNumber&'
-                      +
-                      "DMDate=$_dmDate&HatchDate=$_hdate&uname=$UserName&Code=$_CCode&CName=$_CName&"
-                      +
-                      "Chick_type=$_ctype&"
-                      +
-                      "CihckRate=$_rate&Remarks=$_remarks&TotalChicks=$_totalChicks&Mortality=$_trasnitMortality&Hatchries=$_hatchery");
-                      //print(url);
-                      NetworkHelper networkHelper = NetworkHelper(url);
-                      var data = await networkHelper.getData();
-                        print(data);
-                    } catch (e) {
-                      print(e);
-                    }
-                    // showToast("Show Long Toast", duration: Toast.LENGTH_LONG);
-                    Fluttertoast.showToast(msg : "Supply Information Saved...", toastLength: Toast.LENGTH_LONG, gravity: ToastGravity.CENTER);
-
-                    Navigator.of(context).pop();
-
-                    try {
-
-                      double freeper=0,free=0,chicks_qty=0,biiling_qty=0,amount = 0 ;
-                      if (_ctype == 'Broiler')
-                        {
-                          freeper = 2;
-                          free = (double.parse(_totalChicks.toString()) + double.parse(_trasnitMortality.toString())) * 2/102;
-                          chicks_qty = (double.parse(_totalChicks.toString()) + double.parse(_trasnitMortality.toString())) ;
-                          biiling_qty = (double.parse(_totalChicks.toString()) + double.parse(_trasnitMortality.toString())) - free;
-                          amount = biiling_qty * double.parse(_rate.toString());
+              _isSaved
+                  ? Center(
+                      child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                    ))
+                  : RoundedButton(
+                      title: 'Save Supply',
+                      colour: Colors.lightBlueAccent,
+                      onPressed: () async {
+                        setState(() {
+                          _isSaved = true;
+                        });
+                        var connectivityResult =
+                            await Connectivity().checkConnectivity();
+                        if (connectivityResult != ConnectivityResult.mobile &&
+                            connectivityResult != ConnectivityResult.wifi) {
+                          Fluttertoast.showToast(
+                              msg: "Please check Network Connectivity",
+                              toastLength: Toast.LENGTH_LONG,
+                              gravity: ToastGravity.CENTER);
+                          return;
                         }
-                      if (_ctype == 'Broiler(M)')
-                      {
-                        freeper = 2;
-                      }
-                      if (_ctype == 'Layer')
-                      {
-                        freeper = 5;
-                      }
-                      if (_ctype == 'Cockrel')
-                      {
-                        freeper = 0;
-                      }
 
-                      String _msg =
-                          "Supplied $_ctype Chicks having Qty $_totalChicks With  ${freeper.toStringAsFixed(0)} , Final Qty ${biiling_qty.toStringAsFixed(0)} @ $_rate   amount ${amount.toStringAsFixed(0) } to $_CName  by DM $_dmNumber For Any Query Contact:9685043413 "  ;
-                      List<String> recipents = [_MobileNumber!];
-                      String _r = await sendSMS(
-                          message: _msg, recipients: recipents);
-                      //print(_r);
-                      FlutterOpenWhatsapp.sendSingleMessage(
-                         "91$_MobileNumber", _msg);
-                    } catch (e) {
-                      print(e);
-                    }
+                        fetchDMNumber();
+                        try {
+                          Uri url = Uri.parse(
+                              '$Url/InsertDMData?AreaCode=$AreaCode&Area=$AreaName&DMNo=$_dmNumber&' +
+                                  "DMDate=$_dmDate&HatchDate=$_hdate&uname=$UserName&Code=$_CCode&CName=$_CName&" +
+                                  "Chick_type=$_ctype&" +
+                                  "CihckRate=$_rate&Remarks=$_remarks&TotalChicks=$_totalChicks&Mortality=$_trasnitMortality&Hatchries=$_hatchery");
+                          //print(url);
+                          NetworkHelper networkHelper = NetworkHelper(url);
+                          var data = await networkHelper.getData();
+                          print(data);
+                        } catch (e) {
+                          print(e);
+                        }
+                        // showToast("Show Long Toast", duration: Toast.LENGTH_LONG);
+                        Fluttertoast.showToast(
+                            msg: "Supply Information Saved...",
+                            toastLength: Toast.LENGTH_LONG,
+                            gravity: ToastGravity.CENTER);
 
+                        Navigator.of(context).pop();
 
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => SalesMenuGrid()),
-                    );
-                    SharedPreferences shpSypply =
-                    await SharedPreferences.getInstance();
-                    shpSypply.clear();
-                  },),
+                        try {
+                          int  chicks_qty = 0, biiling_qty = 0;
+                          double freeper = 0, amount = 0,free = 0;
+                          if (_ctype == 'Broiler' || _ctype == 'Broiler(M)') {
+                            freeper = 2;
+                          }
+                          if (_ctype == 'Layer') {
+                            freeper = 5;
+                          }
+                          if (_ctype == 'Cockrel') {
+                            freeper = 0;
+                          }
+
+                          setState(() {
+                            free = int.parse(_totalChicks.toString()) *
+                                (freeper / (100 + freeper));
+
+                            chicks_qty =
+                                (int.parse(_totalChicks.toString()) +
+                                    int.parse(_trasnitMortality.toString()));
+                            biiling_qty =
+                                int.parse(_totalChicks.toString()) -  free.round();
+
+                            amount =
+                                biiling_qty * double.parse(_rate.toString());
+                          });
+
+                          String _msg =
+                              "Supplied $_ctype Chicks having Qty $chicks_qty With  ${freeper.toStringAsFixed(0)}  % Free, Final Qty ${biiling_qty.toStringAsFixed(0)} @ $_rate   amount ${amount.toStringAsFixed(0)} to $_CName  by DM $_dmNumber For Any Query Contact:9685043413 ";
+                          print(_msg);
+                          List<String> recipents = [_MobileNumber!];
+                          String _r = await sendSMS(
+                              message: _msg, recipients: recipents);
+                          //print(_r);
+                          FlutterOpenWhatsapp.sendSingleMessage(
+                              "91$_MobileNumber", _msg);
+                        } catch (e) {
+                          print(e);
+                        }
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SalesMenuGrid()),
+                        );
+                        SharedPreferences shpSypply =
+                            await SharedPreferences.getInstance();
+                        shpSypply.clear();
+                      },
+                    ),
               SizedBox(
                 height: 5,
               ),

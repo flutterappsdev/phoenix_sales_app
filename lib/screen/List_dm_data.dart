@@ -42,28 +42,27 @@ class _ListDmDataState extends State<ListDmData> {
   bool _isDropDownFilled = false;
 
   void filldmData() async {
-    Uri url =
-       Uri.parse('$Url/ShowDMData?AreaCode=$AreaCode&uname=$UserName&DMDate=${_dmDateController.text}');
+    Uri url = Uri.parse(
+        '$Url/ShowDMData?AreaCode=$AreaCode&uname=$UserName&DMDate=${_dmDateController.text}');
     print(url);
     NetworkHelper networkHelper = NetworkHelper(url);
     var data = await networkHelper.getData();
-   // print(data);
+    // print(data);
     dmList.clear();
     for (var c in data['DMData']) {
       if (c['DMNo'].toString() != 'null') {
         setState(() {
           dmList.add(ListDm(
-            dmNo: c['DMNo'].toString(),
-            dmDate: c['DMDate'].toString(),
-            totalChicks: c['TotalChicks'].toString(),
-            CCode: c['Code'].toString(),
-            CName: c['CName'].toString(),
-            Ctype: c['Chick_type'].toString(),
-            mortalty: c['Mortality'].toString(),
-            rate: c['Rate'].toString(),
-            hdate: c['HatchDate'].toString(),
-            hatchries: c['Hatchries'].toString()
-          ));
+              dmNo: c['DMNo'].toString(),
+              dmDate: c['DMDate'].toString(),
+              totalChicks: c['TotalChicks'].toString(),
+              CCode: c['Code'].toString(),
+              CName: c['CName'].toString(),
+              Ctype: c['Chick_type'].toString(),
+              mortalty: c['Mortality'].toString(),
+              rate: c['Rate'].toString(),
+              hdate: c['HatchDate'].toString(),
+              hatchries: c['Hatchries'].toString()));
         });
       }
     }
@@ -72,7 +71,8 @@ class _ListDmDataState extends State<ListDmData> {
   }
 
   void fillAlldmData() async {
-    Uri url =  Uri.parse('$Url/ShowAllDMData?AreaCode=$AreaCode&uname=$UserName');
+    Uri url =
+        Uri.parse('$Url/ShowAllDMData?AreaCode=$AreaCode&uname=$UserName');
     print(url);
     NetworkHelper networkHelper = NetworkHelper(url);
     var data = await networkHelper.getData();
@@ -82,17 +82,16 @@ class _ListDmDataState extends State<ListDmData> {
       if (c['DMNo'].toString() != 'null') {
         setState(() {
           dmList.add(ListDm(
-            dmNo: c['DMNo'].toString(),
-            dmDate: c['DMDate'].toString(),
-            totalChicks: c['TotalChicks'].toString(),
-            CCode: c['Code'].toString(),
-            CName: c['CName'].toString(),
-            Ctype: c['Chick_type'].toString(),
-            mortalty: c['Mortality'].toString(),
-            rate: c['Rate'].toString(),
-            hdate: c['HatchDate'].toString(),
-            hatchries: c['Hatchries'].toString()
-          ));
+              dmNo: c['DMNo'].toString(),
+              dmDate: c['DMDate'].toString(),
+              totalChicks: c['TotalChicks'].toString(),
+              CCode: c['Code'].toString(),
+              CName: c['CName'].toString(),
+              Ctype: c['Chick_type'].toString(),
+              mortalty: c['Mortality'].toString(),
+              rate: c['Rate'].toString(),
+              hdate: c['HatchDate'].toString(),
+              hatchries: c['Hatchries'].toString()));
         });
       }
     }
@@ -121,7 +120,7 @@ class _ListDmDataState extends State<ListDmData> {
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
-     fillAlldmData();
+    fillAlldmData();
     super.didChangeDependencies();
   }
 
@@ -196,19 +195,20 @@ class _ListDmDataState extends State<ListDmData> {
                       height: MediaQuery.of(context).size.height - 300,
                       child: ListView.builder(
                         itemBuilder: (context, index) => GestureDetector(
-                          onTap: (){
-                            Navigator.pushNamed(context, PdfDm.id , arguments: {
-                              'dmno':dmList[index].dmNo.toString(),
+                          onTap: () {
+                            Navigator.pushNamed(context, PdfDm.id, arguments: {
+                              'dmno': dmList[index].dmNo.toString(),
                               'dmdate': dmList[index].dmDate.toString(),
-                              'cname':dmList[index].CName! +"#" + dmList[index].CCode.toString(),
-                              'hatchdate':dmList[index].hdate.toString(),
-                              'ctype': dmList[index].Ctype .toString(),
-                              'qty':dmList[index].totalChicks.toString(),
-                              'mortality':dmList[index].mortalty.toString(),
-                             'rate':dmList[index].rate.toString(),
+                              'cname': dmList[index].CName! +
+                                  "#" +
+                                  dmList[index].CCode.toString(),
+                              'hatchdate': dmList[index].hdate.toString(),
+                              'ctype': dmList[index].Ctype.toString(),
+                              'qty': dmList[index].totalChicks.toString(),
+                              'mortality': dmList[index].mortalty.toString(),
+                              'rate': dmList[index].rate.toString(),
                             });
                             print('tr pds');
-
                           },
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -259,10 +259,8 @@ class _ListDmDataState extends State<ListDmData> {
                                   )
                                 ],
                               ),
-
                               Text(
-                                "Unit:" +
-                                    dmList[index].hatchries.toString(),
+                                "Unit:" + dmList[index].hatchries.toString(),
                                 style: TextStyle(color: Colors.black),
                               ),
                               SizedBox(
@@ -276,7 +274,6 @@ class _ListDmDataState extends State<ListDmData> {
                               SizedBox(
                                 height: 3,
                               ),
-
                             ],
                           ),
                         ),
